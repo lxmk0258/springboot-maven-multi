@@ -1,0 +1,12 @@
+logs/*
+out
+data/*
+.idea/*
+.idea/
+*.iml
+*.log
+*.ipr
+*.iws
+*.pyc
+.DS_Store
+*/target/*
