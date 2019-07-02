@@ -3,10 +3,11 @@ out
 data/*
 .idea/*
 .idea/
+target/
+target/*
 *.iml
 *.log
 *.ipr
 *.iws
 *.pyc
 .DS_Store
-target/*
