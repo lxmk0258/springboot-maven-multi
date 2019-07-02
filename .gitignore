@@ -9,4 +9,4 @@ data/*
 *.iws
 *.pyc
 .DS_Store
-*/target/*
+target/*
