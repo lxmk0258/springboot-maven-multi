@@ -13,10 +13,10 @@ public class UserController {
 
 
     @GetMapping("/login")
-    public @ResponseBody String login(@RequestParam(value = "name")String name,
-                             @RequestParam(value = "password")String password) throws Exception {
+    public @ResponseBody String login(@RequestParam(value = "id")Long id,
+                             @RequestParam(value = "password")String password) {
 
-        if(dubboServiceImpl.login(name,password)){
+        if(dubboServiceImpl.login(id,password)){
             return "success";
         }else{
             return "fail";

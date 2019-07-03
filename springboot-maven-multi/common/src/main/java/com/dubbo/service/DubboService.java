@@ -1,5 +1,5 @@
 package com.dubbo.service;
 
 public interface DubboService {
-    boolean login(String name ,String password);
+    boolean login(Long id ,String password);
 }
