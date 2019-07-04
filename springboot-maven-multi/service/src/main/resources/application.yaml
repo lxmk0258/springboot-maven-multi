@@ -22,9 +22,9 @@ spring:
       enabled: always #复制代码
 
   datasource:
-    url: jdbc:mysql://192.168.1.26:3306/rcd_phoenix
-    username: boss
-    password:
+    url: jdbc:mysql://localhost:3306/mysql?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true
+    username: root
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     druid:

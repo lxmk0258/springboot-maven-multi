@@ -13,7 +13,7 @@ public class UserController {
 
 
     @GetMapping("/login")
-    public @ResponseBody String login(@RequestParam(value = "id")Long id,
+    public @ResponseBody String login(@RequestParam(value = "id")int id,
                              @RequestParam(value = "password")String password) {
 
         if(dubboServiceImpl.login(id,password)){

@@ -6,12 +6,12 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 @Mapper
-public interface UserDao {
+public interface UserMapper {
     /**
      * 通过名字查询用户信息
      */
 //    @Select("SELECT * FROM recall_expect_v3_0 WHERE id = #{id}")
-    User findUserById(@Param("id") Long id);
+    User findUserById(@Param("id") int id);
 
 //    /**
 //     * 查询所有用户信息
@@ -19,11 +19,12 @@ public interface UserDao {
 //    @Select("SELECT * FROM user")
 //    List<User> findAllUser();
 //
-//    /**
-//     * 插入用户信息
-//     */
-//    @Insert("INSERT INTO user(name, age,money) VALUES(#{name}, #{age}, #{money})")
-//    void insertUser(@Param("name") String name, @Param("age") Integer age, @Param("money") Double money);
+    /**
+     * 插入用户信息
+     */
+    @Insert("INSERT INTO user_info (name, age,money ,comment) VALUES (#{name}, #{age}, #{money} ,#{comment})")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    void insertUser(User user);
 //
 //    /**
 //     * 根据 id 更新用户信息

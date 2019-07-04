@@ -2,6 +2,7 @@ package com.dao;
 
 import com.ServiceApplication;
 import com.bean.User;
+import com.bean.UserAccount;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,16 +14,19 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = ServiceApplication.class)
-public class UserDaoTest {
+public class UserAccountMapperTest {
 
-    private static Logger log = LoggerFactory.getLogger(UserDaoTest.class);
+    private static Logger log = LoggerFactory.getLogger(UserAccountMapperTest.class);
 
     @Autowired
-    private UserDao userDao;
+    private UserAccountMapper userAccountMapper;
 
     @Test
-    public void findUserByIdTest(){
-        User user = userDao.findUserById(1l);
-        Assert.assertEquals("王军", user.getName());
+    public void insertTest(){
+        UserAccount account = new UserAccount();
+        account.setUsername("wangjun");
+        account.setPassword("123456");
+        account.setUser_id(1);
+        userAccountMapper.insert(account);
     }
 }
