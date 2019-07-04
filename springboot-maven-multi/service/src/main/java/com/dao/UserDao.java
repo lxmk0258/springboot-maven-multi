@@ -10,7 +10,7 @@ public interface UserDao {
     /**
      * 通过名字查询用户信息
      */
-    @Select("SELECT * FROM recall_expect_v3_0 WHERE id = #{id}")
+//    @Select("SELECT * FROM recall_expect_v3_0 WHERE id = #{id}")
     User findUserById(@Param("id") Long id);
 
 //    /**
