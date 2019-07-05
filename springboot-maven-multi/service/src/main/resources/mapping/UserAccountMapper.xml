@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.UserAccountMapper" >
-  <resultMap id="BaseResultMap" type="com.bean.UserAccount" >
-    <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="user_id" property="user_id" jdbcType="INTEGER" />
-  </resultMap>
-  <insert id="insert" parameterType="com.bean.UserAccount" >
-    insert into user_account (username, password, user_id
-      )
-    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{user_id,jdbcType=INTEGER}
-      )
-  </insert>
+<mapper namespace="com.dao.UserAccountMapper">
+    <resultMap id="BaseResultMap" type="com.bean.UserAccount">
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <association property="user" column="user_id" resultMap="UserInfoWithBLOBs"/>
+    </resultMap>
+    <resultMap id="UserInfo" type="com.bean.User">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="money" property="money" jdbcType="DOUBLE"/>
+    </resultMap>
+    <resultMap id="UserInfoWithBLOBs" type="com.bean.User" extends="UserInfo">
+        <result column="comment" property="comment" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.bean.UserAccount">
+        insert into user_account
+            (username, password, user_id)
+        values
+            (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{user.id,jdbcType=INTEGER})
+    </insert>
+
+    <select id="selectAcountByUsername" resultMap="BaseResultMap">
+        SELECT * FROM
+            user_info ui,user_account ua
+        WHERE ui.id = ua.user_id
+            AND ua.username = #{username}
+    </select>
 </mapper>

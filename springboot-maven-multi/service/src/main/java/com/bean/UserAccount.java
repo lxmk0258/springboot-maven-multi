@@ -5,7 +5,7 @@ public class UserAccount {
 
     private String password;
 
-    private Integer user_id;
+    private User user;
 
     public String getUsername() {
         return username;
@@ -23,11 +23,11 @@ public class UserAccount {
         this.password = password == null ? null : password.trim();
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -19,7 +19,7 @@ public class DefaultDubboServiceImpl implements DubboService {
     @Override
     public boolean login(int id, String password) {
 
-        User user = userMapper.findUserById(id);
+        User user = userMapper.selectUserById(id);
         LOGGER.info(user.getName() + " login");
         return password.equals(String.valueOf(user.getId()));
     }

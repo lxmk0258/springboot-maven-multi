@@ -24,9 +24,20 @@ public class UserAccountMapperTest {
     @Test
     public void insertTest(){
         UserAccount account = new UserAccount();
-        account.setUsername("wangjun");
+        account.setUsername("chutian1");
         account.setPassword("123456");
-        account.setUser_id(1);
+        User user = new User();
+        user.setId(5);
+        user.setAge(10);
+        user.setName("雏田");
+        user.setComment("太子妃");
+        account.setUser(user);
         userAccountMapper.insert(account);
+    }
+
+    @Test
+    public void selectAcountByUsernameTest(){
+        UserAccount account = userAccountMapper.selectAcountByUsername("wangjun");
+        Assert.assertEquals("王军", account.getUser().getName());
     }
 }

@@ -1,5 +1,7 @@
 package com.bean;
 
+import java.util.List;
+
 public class User {
     private Integer id;
 
@@ -10,6 +12,8 @@ public class User {
     private Double money;
 
     private String comment;
+
+    private List<Order> orderList;
 
     public Integer getId() {
         return id;
@@ -49,5 +53,13 @@ public class User {
 
     public void setComment(String comment) {
         this.comment = comment == null ? null : comment.trim();
+    }
+
+    public List<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
     }
 }

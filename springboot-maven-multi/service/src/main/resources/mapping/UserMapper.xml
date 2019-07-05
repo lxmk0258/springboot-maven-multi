@@ -6,11 +6,21 @@
         <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="age" property="age" jdbcType="INTEGER" />
         <result column="money" property="money" jdbcType="DOUBLE" />
+        <collection property="orderList" ofType="com.bean.Order" >
+            <result column="id" property="id" jdbcType="INTEGER" />
+            <result column="order_price" property="order_price" jdbcType="DOUBLE" />
+            <result column="order_status" property="order_status" jdbcType="VARCHAR" />
+            <result column="add_time" property="add_time" jdbcType="TIMESTAMP" />
+            <result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+        </collection>
     </resultMap>
     <resultMap id="ResultMapWithBLOBs" type="com.bean.User" extends="BaseResultMap" >
         <result column="comment" property="comment" jdbcType="LONGVARCHAR" />
     </resultMap>
-    <select id="findUserById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select * from user_info WHERE id = #{id}
+    <select id="selectUserById" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select * from
+            user_info ui LEFT JOIN order_info oi
+                ON ui.id = oi.user_id
+        WHERE ui.id = #{id}
     </select>
 </mapper>

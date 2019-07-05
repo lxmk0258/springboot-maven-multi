@@ -21,10 +21,11 @@ public class UserMapperTest {
     private UserMapper userMapper;
 
     @Test
-    public void findUserByIdTest(){
-        User user = userMapper.findUserById(1);
-        Assert.assertEquals("王军", user.getName());
+    public void selectUserByIdTest(){
+        User user = userMapper.selectUserById(1);
+        Assert.assertEquals(2, user.getOrderList().size());
     }
+
     @Test
     public void insertUserTest(){
         User user = new User();
