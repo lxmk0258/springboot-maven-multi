@@ -3,6 +3,7 @@ package com.dao;
 import com.ServiceApplication;
 import com.bean.Article;
 import com.bean.Order;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -33,9 +34,9 @@ public class ArticleMapperTest {
         articleMapper.insert(article);
     }
 
-//    @Test
-//    public void selectAcountByUsernameTest(){
-//        UserAccount account = userAccountMapper.selectAcountByUsername("wangjun");
-//        Assert.assertEquals("王军", account.getUser().getName());
-//    }
+    @Test
+    public void selectArticleByIdTest(){
+        Article article = articleMapper.selectArticleById(1);
+        Assert.assertEquals("王军", article.getOrderList().get(0).getUser().getName());
+    }
 }

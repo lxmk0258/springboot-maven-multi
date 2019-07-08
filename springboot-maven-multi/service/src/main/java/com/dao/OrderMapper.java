@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.FetchType;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface OrderMapper {
@@ -29,5 +30,8 @@ public interface OrderMapper {
                     many = @Many(select = "com.dao.ArticleMapper.selectArticleByOrderId", fetchType = FetchType.LAZY))
     })
     Order selectOrderById(int id);
+
+
+    int orderArticle(int orderId, Map<Integer,Integer> articleAmout);
 
 }

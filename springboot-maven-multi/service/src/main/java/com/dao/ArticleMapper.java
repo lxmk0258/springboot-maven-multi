@@ -17,4 +17,6 @@ public interface ArticleMapper {
 
     @Select("SELECT * FROM article_info WHERE id in (SELECT article_id FROM order_article WHERE order_id = #{id})")
     List<Article> selectArticleByOrderId(int id);
+
+    Article selectArticleById(int id);
 }

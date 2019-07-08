@@ -3,12 +3,19 @@
 <mapper namespace="com.dao.OrderMapper" >
   <resultMap id="BaseResultMap" type="com.bean.Order" >
     <result column="id" property="id" jdbcType="INTEGER" />
-    <result column="user_id" property="user_id" jdbcType="INTEGER" />
     <result column="order_price" property="order_price" jdbcType="DOUBLE" />
     <result column="order_status" property="order_status" jdbcType="VARCHAR" />
     <result column="add_time" property="add_time" jdbcType="TIMESTAMP" />
     <result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
     <association property="user" column="user_id" resultMap="UserInfoWithBLOBs"/>
+    <collection property="articleList" ofType="com.bean.Article" >
+      <result column="id" property="id" jdbcType="INTEGER" />
+      <result column="article_name" property="article_name" jdbcType="VARCHAR" />
+      <result column="article_price" property="article_price" jdbcType="DOUBLE" />
+      <result column="article_num" property="article_num" jdbcType="INTEGER" />
+      <result column="add_time" property="add_time" jdbcType="TIMESTAMP" />
+      <result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+    </collection>
   </resultMap>
   <resultMap id="UserInfo" type="com.bean.User" >
     <result column="id" property="id" jdbcType="INTEGER" />
@@ -19,4 +26,14 @@
   <resultMap id="UserInfoWithBLOBs" type="com.bean.User" extends="UserInfo" >
     <result column="comment" property="comment" jdbcType="LONGVARCHAR" />
   </resultMap>
+
+  <insert id="orderArticle">
+    INSERT INTO order_article
+    (order_id,article_id,amout)
+    VALUES
+    <foreach collection="articleAmout" index="key"  item="ent" separator=",">
+      (#{orderId}, #{key}, #{ent})
+    </foreach>
+  </insert>
+
 </mapper>

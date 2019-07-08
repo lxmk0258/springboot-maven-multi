@@ -8,5 +8,30 @@
     <result column="article_num" property="article_num" jdbcType="INTEGER" />
     <result column="add_time" property="add_time" jdbcType="TIMESTAMP" />
     <result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+    <collection property="orderList" ofType="com.bean.Order" >
+      <result column="id" property="id" jdbcType="INTEGER" />
+      <result column="order_price" property="order_price" jdbcType="DOUBLE" />
+      <result column="order_status" property="order_status" jdbcType="VARCHAR" />
+      <result column="add_time" property="add_time" jdbcType="TIMESTAMP" />
+      <result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+      <association property="user" column="user_id" resultMap="UserInfoWithBLOBs"/>
+    </collection>
   </resultMap>
+  <resultMap id="UserInfo" type="com.bean.User" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="money" property="money" jdbcType="DOUBLE" />
+  </resultMap>
+  <resultMap id="UserInfoWithBLOBs" type="com.bean.User" extends="UserInfo" >
+    <result column="comment" property="comment" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+  <select id="selectArticleById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select * from article_info ai
+            INNER JOIN order_article oa ON ai.id = oa.article_id
+            INNER JOIN order_info oi ON oa.order_id = oi.id
+            INNER JOIN user_info ui ON ui.id = oi.user_id
+        WHERE ai.id = #{id}
+    </select>
 </mapper>
