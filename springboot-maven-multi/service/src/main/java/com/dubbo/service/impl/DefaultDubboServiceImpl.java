@@ -2,6 +2,8 @@ package com.dubbo.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.bean.User;
+import com.bean.UserAccount;
+import com.dao.UserAccountMapper;
 import com.dao.UserMapper;
 import com.dubbo.service.DubboService;
 import org.slf4j.Logger;
@@ -14,13 +16,13 @@ public class DefaultDubboServiceImpl implements DubboService {
     private static Logger LOGGER = LoggerFactory.getLogger(DefaultDubboServiceImpl.class);
 
     @Autowired
-    private UserMapper userMapper;
+    private UserAccountMapper userAccountMapper;
 
     @Override
-    public boolean login(int id, String password) {
+    public boolean login(String username, String password) {
 
-        User user = userMapper.selectUserById(id);
-        LOGGER.info(user.getName() + " login");
-        return password.equals(String.valueOf(user.getId()));
+        UserAccount userAccount = userAccountMapper.selectAcountByUsername(username);
+        LOGGER.info(userAccount.getUser().getName() + " login");
+        return password.equals(userAccount.getPassword());
     }
 }

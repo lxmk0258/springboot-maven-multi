@@ -13,13 +13,14 @@ public class UserController {
 
 
     @GetMapping("/login")
-    public @ResponseBody String login(@RequestParam(value = "id")int id,
-                             @RequestParam(value = "password")String password) {
+    public @ResponseBody
+    String login(@RequestParam(value = "username") String username,
+                 @RequestParam(value = "password") String password) {
 
-        if(dubboServiceImpl.login(id,password)){
-            return "success";
-        }else{
-            return "fail";
+        if (dubboServiceImpl.login(username, password)) {
+            return username + " login success";
+        } else {
+            return username + " login fail";
         }
 
     }
