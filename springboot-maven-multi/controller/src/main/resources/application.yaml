@@ -17,3 +17,7 @@ spring:
   output:
     ansi:
       enabled: always #复制代码
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp

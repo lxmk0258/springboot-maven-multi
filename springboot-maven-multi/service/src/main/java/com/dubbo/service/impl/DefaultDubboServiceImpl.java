@@ -19,10 +19,13 @@ public class DefaultDubboServiceImpl implements DubboService {
     private UserAccountMapper userAccountMapper;
 
     @Override
-    public boolean login(String username, String password) {
+    public String login(String username, String password) {
 
         UserAccount userAccount = userAccountMapper.selectAcountByUsername(username);
-        LOGGER.info(userAccount.getUser().getName() + " login");
-        return password.equals(userAccount.getPassword());
+        if (userAccount == null || !password.equals(userAccount.getPassword())) {
+            return null;
+        } else {
+            return userAccount.getUser().getName();
+        }
     }
 }
