@@ -22,7 +22,7 @@
 <div>
     <div class="center">
         <form action="/login">
-            <input type="text" name="username" value="${username}" placeholder="用户名"> <br>
+            <input type="text" name="username" value="${username}" placeholder="用户名"><br>
             <input type="password" name="password" value="" placeholder="密码"><br>
             <input type="submit" name="" value="登录">
         </form>

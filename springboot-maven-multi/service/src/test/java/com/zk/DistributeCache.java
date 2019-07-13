@@ -12,7 +12,7 @@ import org.springframework.util.CollectionUtils;
  */
 public class DistributeCache
 {
-    private static List<String> msgCache = new ArrayList<String>();
+    private static List<String> msgCache = new ArrayList<>();
 
     static class MsgConsumer extends Thread
     {
@@ -42,7 +42,7 @@ public class DistributeCache
         }
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         for(int i = 0; i < 100; i++)
         {
             msgCache.add("msg" + i);

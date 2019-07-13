@@ -17,12 +17,11 @@ import org.apache.zookeeper.data.Stat;
  * @author coshaho
  *
  */
-public class ZookeeperLock
+class ZookeeperLock
 {
-    private String ROOT_LOCK_PATH = "/Locks";
-    private String PRE_LOCK_NAME = "mylock_";
+    private final String ROOT_LOCK_PATH = "/Locks";
     private static ZookeeperLock lock;
-    public static ZookeeperLock getInstance()
+    static ZookeeperLock getInstance()
     {
         if(null == lock)
         {
@@ -33,9 +32,9 @@ public class ZookeeperLock
 
     /**
      * 获取锁：实际上是创建线程目录，并判断线程目录序号是否最小
-     * @return
+     * @return tag
      */
-    public String getLock()
+    String getLock()
     {
         try
         {
@@ -44,8 +43,9 @@ public class ZookeeperLock
             // 1、目录名称 2、目录文本信息
             // 3、文件夹权限，Ids.OPEN_ACL_UNSAFE表示所有权限
             // 4、目录类型，CreateMode.EPHEMERAL_SEQUENTIAL表示会在目录名称后面加一个自增加数字
+            String preLockName = "mylock_";
             String lockPath = getZkClient().create(
-                    ROOT_LOCK_PATH + '/' + PRE_LOCK_NAME,
+                    ROOT_LOCK_PATH + '/' + preLockName,
                     Thread.currentThread().getName().getBytes(),
                     Ids.OPEN_ACL_UNSAFE,
                     CreateMode.EPHEMERAL_SEQUENTIAL);
@@ -111,9 +111,9 @@ public class ZookeeperLock
 
     /**
      * 释放锁：实际上是删除当前线程目录
-     * @param lockPath
+     * @param lockPath path
      */
-    public void releaseLock(String lockPath)
+    void releaseLock(String lockPath)
     {
         try
         {
@@ -126,14 +126,14 @@ public class ZookeeperLock
         }
     }
 
-    private String zookeeperIp = "127.0.0.1:2181";
     private static ZooKeeper zkClient  = null;
-    public ZooKeeper getZkClient()
+    private ZooKeeper getZkClient()
     {
         if(null == zkClient)
         {
             try
             {
+                String zookeeperIp = "127.0.0.1:2181";
                 zkClient = new ZooKeeper(zookeeperIp, 3000, null);
             }
             catch (IOException e)

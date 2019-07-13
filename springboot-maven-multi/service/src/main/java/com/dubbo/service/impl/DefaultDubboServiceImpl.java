@@ -1,10 +1,8 @@
 package com.dubbo.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.bean.User;
 import com.bean.UserAccount;
 import com.dao.UserAccountMapper;
-import com.dao.UserMapper;
 import com.dubbo.service.DubboService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
