@@ -55,5 +55,6 @@ public class DistributeCache
         consumer2.start();
         consumer3.start();
         consumer4.start();
+//
     }
 }
