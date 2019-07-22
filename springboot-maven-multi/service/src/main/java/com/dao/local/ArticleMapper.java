@@ -1,6 +1,6 @@
-package com.dao;
+package com.dao.local;
 
-import com.bean.Article;
+import com.bean.local.Article;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;

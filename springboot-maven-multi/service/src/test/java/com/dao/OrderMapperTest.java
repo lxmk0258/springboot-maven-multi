@@ -1,8 +1,9 @@
 package com.dao;
 
 import com.ServiceApplication;
-import com.bean.Order;
-import com.bean.User;
+import com.bean.local.Order;
+import com.bean.local.User;
+import com.dao.local.OrderMapper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

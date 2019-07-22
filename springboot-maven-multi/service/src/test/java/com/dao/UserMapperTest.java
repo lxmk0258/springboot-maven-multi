@@ -1,7 +1,8 @@
 package com.dao;
 
 import com.ServiceApplication;
-import com.bean.User;
+import com.bean.local.User;
+import com.dao.local.UserMapper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

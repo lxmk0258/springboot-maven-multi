@@ -1,8 +1,8 @@
 package com.dao;
 
 import com.ServiceApplication;
-import com.bean.Article;
-import com.bean.Order;
+import com.bean.local.Article;
+import com.dao.local.ArticleMapper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

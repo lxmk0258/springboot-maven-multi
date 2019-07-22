@@ -1,8 +1,7 @@
-package com.dao;
+package com.dao.local;
 
-import com.bean.User;
+import com.bean.local.User;
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.mapping.FetchType;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public interface UserMapper {
 //            @Result(column = "money", property = "money"),
 //            @Result(column = "comment", property = "comment"),
 //            @Result(column = "id", property = "orderList",
-//                    many = @Many(select = "com.dao.OrderMapper.selectOrderByUserId", fetchType = FetchType.LAZY))
+//                    many = @Many(select = "com.dao.local.OrderMapper.selectOrderByUserId", fetchType = FetchType.LAZY))
 //    })
     User selectUserById(@Param("id") int id);
 

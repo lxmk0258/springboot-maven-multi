@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.UserMapper">
-    <resultMap id="BaseResultMap" type="com.bean.User" >
+<mapper namespace="com.dao.local.UserMapper">
+    <resultMap id="BaseResultMap" type="com.bean.local.User" >
         <result column="id" property="id" jdbcType="INTEGER" />
         <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="age" property="age" jdbcType="INTEGER" />
         <result column="money" property="money" jdbcType="DOUBLE" />
-        <collection property="orderList" ofType="com.bean.Order" >
+        <collection property="orderList" ofType="com.bean.local.Order" >
             <result column="id" property="id" jdbcType="INTEGER" />
             <result column="order_price" property="order_price" jdbcType="DOUBLE" />
             <result column="order_status" property="order_status" jdbcType="VARCHAR" />
@@ -14,7 +14,7 @@
             <result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
         </collection>
     </resultMap>
-    <resultMap id="ResultMapWithBLOBs" type="com.bean.User" extends="BaseResultMap" >
+    <resultMap id="ResultMapWithBLOBs" type="com.bean.local.User" extends="BaseResultMap" >
         <result column="comment" property="comment" jdbcType="LONGVARCHAR" />
     </resultMap>
     <select id="selectUserById" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">

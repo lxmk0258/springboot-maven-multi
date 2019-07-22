@@ -1,4 +1,4 @@
-package com.bean;
+package com.bean.local;
 
 import java.util.Date;
 import java.util.List;

@@ -1,8 +1,7 @@
-package com.dao;
+package com.dao.local;
 
-import com.bean.UserAccount;
+import com.bean.local.UserAccount;
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.mapping.FetchType;
 
 @Mapper
 public interface UserAccountMapper {
@@ -15,7 +14,7 @@ public interface UserAccountMapper {
 //            @Result(id=true,column="username",property="username"),
 //            @Result(column="password",property="password"),
 //            @Result(column="user_id",property="user",
-//                    one = @One(select = "com.dao.UserMapper.selectUserById",fetchType = FetchType.LAZY))
+//                    one = @One(select = "com.dao.local.UserMapper.selectUserById",fetchType = FetchType.LAZY))
 //    })
     UserAccount selectAcountByUsername(String username);
 

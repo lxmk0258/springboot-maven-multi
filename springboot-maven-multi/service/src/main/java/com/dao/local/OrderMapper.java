@@ -1,6 +1,6 @@
-package com.dao;
+package com.dao.local;
 
-import com.bean.Order;
+import com.bean.local.Order;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.FetchType;
 
@@ -25,9 +25,9 @@ public interface OrderMapper {
             @Result(column = "add_time", property = "add_time"),
             @Result(column = "update_time", property = "update_time"),
             @Result(column = "user_id", property = "user",
-                    one = @One(select = "com.dao.UserMapper.selectUserById", fetchType = FetchType.LAZY)),
+                    one = @One(select = "com.dao.local.UserMapper.selectUserById", fetchType = FetchType.LAZY)),
             @Result(column = "id", property = "articleList",
-                    many = @Many(select = "com.dao.ArticleMapper.selectArticleByOrderId", fetchType = FetchType.LAZY))
+                    many = @Many(select = "com.dao.local.ArticleMapper.selectArticleByOrderId", fetchType = FetchType.LAZY))
     })
     Order selectOrderById(int id);
 
