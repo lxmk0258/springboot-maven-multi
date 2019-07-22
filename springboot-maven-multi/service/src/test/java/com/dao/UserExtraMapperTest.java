@@ -1,8 +1,8 @@
 package com.dao;
 
 import com.ServiceApplication;
-import com.bean.rcd.RecallExpect;
-import com.dao.rcd.RecallExpectMapper;
+import com.bean.rcd.UserExtra;
+import com.dao.rcd.UserExtraMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -15,18 +15,18 @@ import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = ServiceApplication.class)
-public class RecallExpectMapperTest {
+public class UserExtraMapperTest {
 
-    private static Logger log = LoggerFactory.getLogger(RecallExpectMapperTest.class);
+    private static Logger log = LoggerFactory.getLogger(UserExtraMapperTest.class);
 
     @Autowired
-    private RecallExpectMapper recallExpectMapper;
+    private UserExtraMapper userExtraMapper;
 
     @Test
     public void selectExpectByIdTest() {
-        List<RecallExpect> recallExpects = recallExpectMapper.selectExpectById(0);
-        for (RecallExpect recallExpect : recallExpects) {
-            log.info(recallExpect.getName());
+        List<UserExtra> userExtras = userExtraMapper.selectUserExtraByLimit(10,5);
+        for (UserExtra userExtra : userExtras) {
+            log.info(userExtra.getId()+" : "+userExtra.getDescription());
         }
     }
 }
