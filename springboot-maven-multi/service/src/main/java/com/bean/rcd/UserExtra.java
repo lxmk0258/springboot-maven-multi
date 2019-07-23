@@ -11,7 +11,7 @@ public class UserExtra {
 
     private Integer location;
 
-    private String resume_email;
+    private String email;
 
     private Date update_time;
 
@@ -47,12 +47,12 @@ public class UserExtra {
         this.location = location;
     }
 
-    public String getResume_email() {
-        return resume_email;
+    public String getEmail() {
+        return email;
     }
 
-    public void setResume_email(String resume_email) {
-        this.resume_email = resume_email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Date getUpdate_time() {

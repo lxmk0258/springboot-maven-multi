@@ -18,6 +18,7 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
@@ -54,7 +55,13 @@ public class ElasticsearchTest {
     public void testEsRestClient() throws IOException {
         SearchRequest request = new SearchRequest("boss");
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-        sourceBuilder.query(QueryBuilders.matchQuery("description", "博士"));
+
+        BoolQueryBuilder boolBuilder = QueryBuilders.boolQuery();
+        boolBuilder.must(QueryBuilders.termQuery("description.context_ik_max_word", "博士"));
+        boolBuilder.must(QueryBuilders.termQuery("description", "java"));
+        boolBuilder.must(QueryBuilders.rangeQuery("update_time").from("2019-05-01T00:00:00.000Z").to("2019-06-01T00:00:00.000Z"));
+
+        sourceBuilder.query(boolBuilder);
 //        ## 排序start
         sourceBuilder.sort(new ScoreSortBuilder().order(SortOrder.DESC));
 //        sourceBuilder.sort(new FieldSortBuilder("_uid").order(SortOrder.ASC));
@@ -73,8 +80,8 @@ public class ElasticsearchTest {
 
         System.out.println("SearchHit:" + searchHits.length);
 
-        for(SearchHit hit : searchHits){
-            Map<String,Object> datas = hit.getSourceAsMap();
+        for (SearchHit hit : searchHits) {
+            Map<String, Object> datas = hit.getSourceAsMap();
             System.out.println(datas.toString());
         }
     }
@@ -117,13 +124,14 @@ public class ElasticsearchTest {
     @Test
     public void testCreateIndexByDB() throws IOException {
         int index = 0;
-        int page = 10000;
-        while (true) {
+        int page = 1;
+//        while (true) {
             BulkRequest bulk = new BulkRequest();
 
             List<UserExtra> userExtras = userExtraMapper.selectUserExtraByLimit(index, page);
+            log.info("search DB ");
             if (userExtras.size() == 0) {
-                break;
+//                break;
             }
             for (UserExtra userExtra : userExtras) {
                 JSONObject jsonObject = new JSONObject();
@@ -131,18 +139,18 @@ public class ElasticsearchTest {
                 jsonObject.put("user_id", userExtra.getUser_id());
                 jsonObject.put("description", userExtra.getDescription());
                 jsonObject.put("location", userExtra.getLocation());
-                jsonObject.put("resume_email", userExtra.getResume_email());
+                jsonObject.put("email", userExtra.getEmail());
                 jsonObject.put("update_time", userExtra.getUpdate_time());
 
-                IndexRequest request = new IndexRequest("boss", "geek").source(XContentType.JSON,jsonObject);
+                IndexRequest request = new IndexRequest("boss", "geek").source(jsonObject, XContentType.JSON);
                 bulk.add(request);
 //                log.info(userExtra.getId() + " : " + userExtra.getDescription());
             }
 
-            BulkResponse bulkResponse = highLevelClient.bulk(bulk);
+            highLevelClient.bulk(bulk, RequestOptions.DEFAULT);
             index += page;
             log.info("add size={}", index);
-        }
+//        }
 
     }
 
